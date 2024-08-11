@@ -29,7 +29,7 @@ public class DateTimeTest {
         LocalDate date30Jun = LocalDate.of(2024, 6, 30);
 
         PastTemporalDateProximity adjuster = new PastTemporalDateProximity(new LocalDate[]{
-            date10Feb, date20Apr, date25May,
+            date20Apr, date25May, date10Feb
         });
 
         assertNull(date5Jan.with(adjuster));
