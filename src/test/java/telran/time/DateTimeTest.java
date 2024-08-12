@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.chrono.JapaneseDate;
+import java.time.chrono.MinguoDate;
+import java.time.temporal.Temporal;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +31,7 @@ public class DateTimeTest {
         LocalDate date25May = LocalDate.of(2024, 5, 25);
         LocalDate date30Jun = LocalDate.of(2024, 6, 30);
 
-        PastTemporalDateProximity adjuster = new PastTemporalDateProximity(new LocalDate[]{
+        PastTemporalDateProximity adjuster = new PastTemporalDateProximity(new Temporal[]{
             date20Apr, date25May, date10Feb
         });
 
@@ -38,6 +41,9 @@ public class DateTimeTest {
         assertEquals(date10Feb, date20Apr.with(adjuster));
         assertEquals(date20Apr, date25May.with(adjuster));
         assertEquals(date25May, date30Jun.with(adjuster));
+
+        assertEquals(MinguoDate.from(date10Feb), MinguoDate.from(date20Apr).with(adjuster));
+        assertEquals(JapaneseDate.from(date10Feb), JapaneseDate.from(date20Apr).with(adjuster));
 
         assertThrows(RuntimeException.class, () -> LocalTime.now().with(adjuster));
     }

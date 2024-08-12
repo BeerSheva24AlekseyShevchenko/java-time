@@ -1,6 +1,5 @@
 package telran.time;
 
-import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjuster;
@@ -22,10 +21,7 @@ public class PastTemporalDateProximity implements TemporalAdjuster {
         int index = getGreaterOfLeastIndex(temporal);
 
         if (index >= 0) {
-            result = temporal
-                .with(ChronoField.YEAR, temporals[index].get(ChronoField.YEAR))
-                .with(ChronoField.MONTH_OF_YEAR, temporals[index].get(ChronoField.MONTH_OF_YEAR))
-                .with(ChronoField.DAY_OF_MONTH, temporals[index].get(ChronoField.DAY_OF_MONTH));
+            result = temporal.minus(temporals[index].until(temporal, ChronoUnit.DAYS), ChronoUnit.DAYS);
         }
 
         return result;
